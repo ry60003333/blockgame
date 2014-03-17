@@ -75,7 +75,7 @@ function init() {
     gameState = GAME_STATE.RUNNING;
     
     // ... but lets test the menu, or drawing in general
-    gameState = GAME_STATE.MENU;
+    //gameState = GAME_STATE.MENU;
     
     // Start the game loop!
     tick();
@@ -141,7 +141,7 @@ function drawHorzCenteredText(message, xOffset, y) {
  * @returns {undefined}
  */
 function drawGame() {
-    game.draw(ctx);
+    game.draw(canvas, ctx);
 }
 
 /**

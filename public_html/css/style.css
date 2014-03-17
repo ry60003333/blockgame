@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 /* Make the canvas fullscreen */
-/* CSS elements courtesy of http://htmlcheats.com/html/resize-the-html5-canvas-dyamically/ */
+/* Citation: CSS elements courtesy of http://htmlcheats.com/html/resize-the-html5-canvas-dyamically/ */
 body, html {
     width: 100%;
     height: 100%;

@@ -9,5 +9,10 @@ window.Player = (function() {
         
     }
     
+    Player.prototype.draw = function(ctx) {
+        ctx.fillStyle = "red";
+        ctx.fillRect(0, 0, Game.TILE_SIZE, Game.TILE_SIZE);
+    };
+    
     return Player;
 })();
