@@ -33,6 +33,12 @@ window.Game = (function() {
      * @returns {undefined}
      */
     Game.prototype.draw = function(canvas, ctx) {
+        
+        // Set to true to just draw the world for debugging purposes.
+        if (false) {
+            this.world.draw(this.player, canvas, ctx);
+            return;
+        }
         // Draw the world centered around the player
         ctx.save();
         
@@ -49,6 +55,11 @@ window.Game = (function() {
          */
         var offsetX = ((canvas.width / 2) % Game.TILE_SIZE) - (Game.TILE_SIZE / 2);
         var offsetY = ((canvas.height / 2) % Game.TILE_SIZE) - (Game.TILE_SIZE / 2);
+        
+        // However, the formula leaves the offset too large by 
+        // 1 tile in each dimension, for reasons I cannot understand
+        offsetX -= Game.TILE_SIZE;
+        offsetY -= Game.TILE_SIZE;
         
         // But we also need to see when the player is moving between tiles
         offsetX -= (this.player.x % 1) * Game.TILE_SIZE;

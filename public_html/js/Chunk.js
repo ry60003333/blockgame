@@ -10,7 +10,7 @@ window.Chunk = (function() {
      * The dimensions of a Chunk.
      * @type Number
      */
-    var CHUNK_SIZE = 32;
+    Chunk.CHUNK_SIZE = 4; //32
     
     /**
      * Creates a Chunk object.
@@ -23,18 +23,36 @@ window.Chunk = (function() {
          * The two dimensional array of tiles in the chunk.
          * @type Array
          */
-        this.tiles = [[]];
+        this.tiles = [];
         
         this.x = x;
         this.y = y;
         
         // By default, initialize the chunk with grass.
-        for (var x = 0; x < CHUNK_SIZE; x++) {
-            for (var y = 0; y < CHUNK_SIZE; y++) {
-                tiles[x][y] = 1; // 1 is the ID for Grass
+        for (var x = 0; x < Chunk.CHUNK_SIZE; x++) {
+            for (var y = 0; y < Chunk.CHUNK_SIZE; y++) {
+                this.tiles[x + "," + y] = 1; // 1 is the ID for Grass
             }
         }
     }
+    
+    Chunk.prototype.draw = function(ctx) {
+        
+        for (var x = 0; x < Chunk.CHUNK_SIZE; x++) {
+            for (var y = 0; y < Chunk.CHUNK_SIZE; y++) {
+                var tileId = this.tiles[x + "," + y];
+                switch (tileId) {
+                    default:
+                        break;
+                    case 1:
+                        ctx.fillStyle = "green";
+                        ctx.fillRect(x * Game.TILE_SIZE, y * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE);
+                        break;
+                }
+            }
+        }
+        
+    };
     
     return Chunk;
 })();
