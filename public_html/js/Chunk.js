@@ -28,7 +28,7 @@ window.Chunk = (function() {
         this.x = x;
         this.y = y;
         
-        var typeVariance = [1, 1, 1, 1, 1, 1];
+        var typeVariance = [1, 1, 1, 1, 1, 1, 2];
         
         var chunkType = typeVariance[Utilities.random(0, typeVariance.length)];
         

@@ -149,6 +149,7 @@ window.Game = (function() {
         var y = 30;
         ctx.fillText("Block Game " + Game.VERSION + " (Build " + Game.BUILD + ")", 5, y);
         ctx.font = "bold 15px Comic Sans";
+        ctx.fillText("Player: " + this.player.x.toFixed(2) + "," + this.player.y.toFixed(2), 5, y += 15);
         ctx.fillText("Canvas Size: " + canvas.width + "," + canvas.height, 5, y += 15);
         ctx.fillText("Tile Size: " + Game.TILE_SIZE, 5, y += 15);
         ctx.fillText("Loaded chunks: " + Object.keys(this.world.chunks).length, 5, y += 15);

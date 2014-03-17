@@ -10,7 +10,6 @@ window.Player = (function() {
      * Creates a new player.
      * @param {Number} x The X Coordinate of the player.
      * @param {Number} y The Y Coordinate of the player.
-     * @param {Image} image The image of the player.
      * @returns {_L7.Player}
      */
     function Player(x, y) {

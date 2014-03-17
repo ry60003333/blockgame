@@ -90,7 +90,7 @@ window.World = (function() {
                 var chunkKey = chunkX + "," + chunkY;
                 var chunk = this.chunks[chunkKey];
                 if (!chunk) {
-                    chunk = new Chunk();
+                    chunk = new Chunk(chunkX, chunkY);
                     this.chunks[chunkKey] = chunk;
                 }
                 
