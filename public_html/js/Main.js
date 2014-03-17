@@ -26,6 +26,18 @@ var ctx;
 var keyStatus = [];
 
 /**
+ * The array of keys that have been pressed.
+ * @type Array
+ */
+var keyPressed = [];
+
+/**
+ * The array of keys that are now up.
+ * @type Array
+ */
+var keyUp = [];
+
+/**
  * The game state constants.
  * @type type
  */
@@ -54,10 +66,16 @@ var lastUpdateTimestamp;
 var game;
 
 /**
- * The tile loader.
- * @type TileLoader
+ * The asset loader.
+ * @type AssetLoader
  */
-var tileLoader;
+var assetLoader;
+
+/**
+ * The tile manager.
+ * @type TileManager
+ */
+var tileManager;
 
 /**
  * Initialize the game.
@@ -81,31 +99,46 @@ function init() {
     // Grab our canvas context.
     ctx = canvas.getContext('2d');
     
-    // Create a new tile loader
-    tileLoader = new TileLoader();
+    // Create a new tile manager
+    tileManager = new TileManager();
+    
+    // Create our asset loader
+    assetLoader = new AssetLoader();
     
     // Load all the tiles!
-    tileLoader.load();
+    tileManager.load(assetLoader);
     
-    // Create an instance of the game
-    game = new Game(tileLoader);
-    
-    // Register our event listeners
-    window.addEventListener("keydown", function(e) {
-        keyStatus[e.keyCode] = true;
+    // Load our assets and start the game.
+    assetLoader.load(function() {
+        
+        // We are now in the callback function
+        // for when everything has finished loading.
+        
+        // Create an instance of the game
+        game = new Game(tileManager);
+
+        // Register our event listeners
+        window.addEventListener("keydown", function(e) {
+            keyStatus[e.keyCode] = true;
+        });
+        window.addEventListener("keyup", function(e) {
+            keyStatus[e.keyCode] = false;
+            keyUp[e.keyCode] = true;
+        });
+        window.addEventListener("keypress", function(e) {
+            keyPressed[e.keyCode] = true;
+        });
+
+        // Start the game in the running state for now.
+        gameState = GAME_STATE.RUNNING;
+
+        // ... but lets test the menu, or drawing in general
+        //gameState = GAME_STATE.MENU;
+
+        // Start the game loop!
+        tick();
+        
     });
-    window.addEventListener("keyup", function(e) {
-        keyStatus[e.keyCode] = false;
-    });
-    
-    // Start the game in the running state for now.
-    gameState = GAME_STATE.RUNNING;
-    
-    // ... but lets test the menu, or drawing in general
-    //gameState = GAME_STATE.MENU;
-    
-    // Start the game loop!
-    tick();
 }
 
 /**
@@ -182,7 +215,7 @@ function update() {
     lastUpdateTimestamp = currentTimestamp;
     
     // Update the contents of the game.
-    game.update(keyStatus, deltaTimeMillis);
+    game.update(keyStatus, keyUp, deltaTimeMillis);
 }
 
 // Make the init function run on startup.

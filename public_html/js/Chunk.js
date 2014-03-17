@@ -43,17 +43,17 @@ window.Chunk = (function() {
     /**
      * Draw the Chunk. (Draws from 0, 0)
      * @param {type} ctx The 2D drawing context.
-     * @param {TileLoader} tileLoader The tile loader.
+     * @param {TileManager} tileManager The tile loader.
      * @returns {undefined}
      */
-    Chunk.prototype.draw = function(ctx, tileLoader) {
+    Chunk.prototype.draw = function(ctx, tileManager) {
         
         for (var x = 0; x < Chunk.CHUNK_SIZE; x++) {
             for (var y = 0; y < Chunk.CHUNK_SIZE; y++) {
                 var tileId = this.tiles[x + "," + y];
                 var drawX = x * Game.TILE_SIZE;
                 var drawY = y * Game.TILE_SIZE;
-                tileLoader.getTile(tileId).draw(ctx, drawX, drawY);
+                tileManager.getTile(tileId).draw(ctx, drawX, drawY);
             }
         }
         

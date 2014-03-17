@@ -14,7 +14,7 @@ window.World = (function() {
         
         // The loaded chunks in the world.
         this.chunks = [];
-        this.drawGrid = true;
+        this.drawGrid = false;
         
         /* The amount of tiles to draw "offscreen"
          * This prevents whitespace on the border when the world is translated
@@ -28,10 +28,10 @@ window.World = (function() {
      * @param {Player} player The player.
      * @param {type} canvas The canvas.
      * @param {type} ctx The 2D drawing context of the canvas.
-     * @param {TileLoader} tileLoader The tile loader.
+     * @param {TileManager} tileManager The tile loader.
      * @returns {undefined}
      */
-    World.prototype.draw = function(player, canvas, ctx, tileLoader) {
+    World.prototype.draw = function(player, canvas, ctx, tileManager) {
         
         // Create a local copy of this for now instead of adding this.
         // in front of everything.
@@ -98,7 +98,7 @@ window.World = (function() {
                 activeChunks[chunkKey] = true;
                 
                 // Draw the chunk
-                chunk.draw(ctx, tileLoader);
+                chunk.draw(ctx, tileManager);
                 
                 // Draw the chunk coordinate if the grid is enabled.
                 if (this.drawGrid) {

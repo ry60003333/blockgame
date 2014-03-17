@@ -8,13 +8,17 @@ window.Tile = (function () {
     
     /**
      * Creates a new Tile.
-     * @param {type} id The unique ID of the tile.
-     * @param {type} color The color of the tile.
+     * @param {Number} id The unique ID of the tile.
+     * @param {String} name The name of the tile.
+     * @param {String} fillStyle The fill style of the tile, if it does not use an image.
+     * @param {Image} image The image of the tile.
      * @returns {_L7.Tile}
      */
-    function Tile(id, color) {
+    function Tile(id, name, fillStyle, image) {
         this.id = id;
-        this.color = color;
+        this.name = name;
+        this.fillStyle = fillStyle;
+        this.image = image;
     }
     
     /**
@@ -26,13 +30,17 @@ window.Tile = (function () {
      */
     Tile.prototype.draw = function(ctx, x, y) {
 
-        // Clear tile; such as air
-        if (this.color === null) {
+        if (this.image === null) {
+            if (this.fillStyle === null) {
+                return;
+            }
+            ctx.fillStyle = this.color;
+            ctx.fillRect(x, y, Game.TILE_SIZE, Game.TILE_SIZE);
             return;
         }
         
-        ctx.fillStyle = this.color;
-        ctx.fillRect(x, y, Game.TILE_SIZE, Game.TILE_SIZE);
+        ctx.drawImage(this.image, x, y, Game.TILE_SIZE, Game.TILE_SIZE);
+        
     };
     
     return Tile;
