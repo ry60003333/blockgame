@@ -27,6 +27,16 @@ window.Utilities = (function() {
         }
     };
     
+    /**
+     * Generate a random number between two values (inclusive).
+     * @param {Number} min The minimum value.
+     * @param {Number} max The maximum value.
+     * @returns {Number} The resulting random number.
+     */
+    Utilities.random = function(min, max) {
+        return Math.floor((Math.random()*max)+min);
+    };
+    
     return Utilities;
     
     

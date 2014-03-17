@@ -21,12 +21,12 @@ window.Game = (function() {
     /**
      * The build number of the game.
      */
-    Game.BUILD = 1;
+    Game.BUILD = 3;
     
     /**
      * The version number of the game.
      */
-    Game.VERSION = "0.1";
+    Game.VERSION = "0.3";
     
     /**
      * The size of a tile, in pixels.
@@ -149,6 +149,9 @@ window.Game = (function() {
         var y = 30;
         ctx.fillText("Block Game " + Game.VERSION + " (Build " + Game.BUILD + ")", 5, y);
         ctx.font = "bold 15px Comic Sans";
+        ctx.fillText("Canvas Size: " + canvas.width + "," + canvas.height, 5, y += 15);
+        ctx.fillText("Tile Size: " + Game.TILE_SIZE, 5, y += 15);
+        ctx.fillText("Loaded chunks: " + Object.keys(this.world.chunks).length, 5, y += 15);
         ctx.fillText("Arrow keys - Movement", 5, y += 15);
         ctx.fillText("D - Toggle world grid", 5, y += 15);
         ctx.fillText("W - Draw only world", 5, y += 15);

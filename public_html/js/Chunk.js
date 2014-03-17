@@ -28,16 +28,41 @@ window.Chunk = (function() {
         this.x = x;
         this.y = y;
         
+        var typeVariance = [1, 1, 1, 1, 1, 1];
+        
+        var chunkType = typeVariance[Utilities.random(0, typeVariance.length)];
+        
         // By default, initialize the chunk with grass.
         for (var x = 0; x < Chunk.CHUNK_SIZE; x++) {
             for (var y = 0; y < Chunk.CHUNK_SIZE; y++) {
-                this.tiles[x + "," + y] = 1; // 1 is the ID for Grass
+                
+                switch (chunkType) {
+                    // Grass
+                    default:
+                    case 1:
+                        this.tiles[x + "," + y] = 1; // 1 is the ID for Grass
+
+                        // Make some pretty flowers!
+                        if (Utilities.random(1, 20) === 1) {
+                            this.tiles[x + "," + y] = 3;
+                        } else if (Utilities.random(1, 30) === 1) {
+                            this.tiles[x + "," + y] = 2; // Dirt
+                        } else if (Utilities.random(1, 100) === 1) {
+                            this.tiles[x + "," + y] = 5; // Stone
+                        }
+                        break;
+                    case 2: // Water
+                        this.tiles[x + "," + y] = 4;
+                        break;
+                }
+                
             }
         }
-        this.tiles[0 + "," + 0] = 3;
+        
+        /*this.tiles[0 + "," + 0] = 3;
         this.tiles[0 + "," + (Chunk.CHUNK_SIZE-1)] = 2;
         this.tiles[(Chunk.CHUNK_SIZE-1) + "," + 0] = 2;
-        this.tiles[(Chunk.CHUNK_SIZE-1) + "," + (Chunk.CHUNK_SIZE-1)] = 3;
+        this.tiles[(Chunk.CHUNK_SIZE-1) + "," + (Chunk.CHUNK_SIZE-1)] = 3;*/
     }
     
     /**
