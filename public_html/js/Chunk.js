@@ -28,7 +28,7 @@ window.Chunk = (function() {
         this.x = x;
         this.y = y;
         
-        var typeVariance = [1, 1, 1, 1, 1, 1, 2];
+        var typeVariance = [1, 1, 1, 1, 1, 1, 2, 3];
         
         var chunkType = typeVariance[Utilities.random(0, typeVariance.length)];
         
@@ -53,6 +53,9 @@ window.Chunk = (function() {
                         break;
                     case 2: // Water
                         this.tiles[x + "," + y] = 4;
+                        break;
+                    case 3: // Salt!
+                        this.tiles[x + "," + y] = 8;
                         break;
                 }
                 
