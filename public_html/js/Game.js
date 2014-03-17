@@ -21,12 +21,12 @@ window.Game = (function() {
     /**
      * The build number of the game.
      */
-    Game.BUILD = 0;
+    Game.BUILD = 1;
     
     /**
      * The version number of the game.
      */
-    Game.VERSION = "0.0";
+    Game.VERSION = "0.1";
     
     /**
      * The size of a tile, in pixels.
@@ -104,8 +104,22 @@ window.Game = (function() {
          * always locks the player onto the grid! :D
          * - Ryan
          */
-        var offsetX = ((canvas.width / 2) % Game.TILE_SIZE) - (Game.TILE_SIZE / 2);
-        var offsetY = ((canvas.height / 2) % Game.TILE_SIZE) - (Game.TILE_SIZE / 2);
+        var offsetX = (((canvas.width / 2)) % Game.TILE_SIZE);
+        var offsetY = (((canvas.height / 2)) % Game.TILE_SIZE);
+        
+        // The follow is a fix for a very strange bug that occured
+        // When the width of the canvas/2 resulted in the offset being 0.
+        // This would result in tiles being drawn with an off-by-one error.
+        if (offsetX === 0) {
+            offsetX = Game.TILE_SIZE;
+        }
+        
+        if (offsetY === 0) {
+            offsetY = Game.TILE_SIZE;
+        }
+        
+        offsetX -= (Game.TILE_SIZE / 2);
+        offsetY -= (Game.TILE_SIZE / 2);
         
         // However, the formula leaves the offset too large by 
         // 1 tile in each dimension, for reasons I cannot understand
