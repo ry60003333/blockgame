@@ -10,7 +10,7 @@ window.Chunk = (function() {
      * The dimensions of a Chunk.
      * @type Number
      */
-    Chunk.CHUNK_SIZE = 4; //32
+    Chunk.CHUNK_SIZE = 8;
     
     /**
      * Creates a Chunk object.
@@ -34,21 +34,26 @@ window.Chunk = (function() {
                 this.tiles[x + "," + y] = 1; // 1 is the ID for Grass
             }
         }
+        this.tiles[0 + "," + 0] = 3;
+        this.tiles[0 + "," + (Chunk.CHUNK_SIZE-1)] = 2;
+        this.tiles[(Chunk.CHUNK_SIZE-1) + "," + 0] = 2;
+        this.tiles[(Chunk.CHUNK_SIZE-1) + "," + (Chunk.CHUNK_SIZE-1)] = 3;
     }
     
-    Chunk.prototype.draw = function(ctx) {
+    /**
+     * Draw the Chunk. (Draws from 0, 0)
+     * @param {type} ctx The 2D drawing context.
+     * @param {TileLoader} tileLoader The tile loader.
+     * @returns {undefined}
+     */
+    Chunk.prototype.draw = function(ctx, tileLoader) {
         
         for (var x = 0; x < Chunk.CHUNK_SIZE; x++) {
             for (var y = 0; y < Chunk.CHUNK_SIZE; y++) {
                 var tileId = this.tiles[x + "," + y];
-                switch (tileId) {
-                    default:
-                        break;
-                    case 1:
-                        ctx.fillStyle = "green";
-                        ctx.fillRect(x * Game.TILE_SIZE, y * Game.TILE_SIZE, Game.TILE_SIZE, Game.TILE_SIZE);
-                        break;
-                }
+                var drawX = x * Game.TILE_SIZE;
+                var drawY = y * Game.TILE_SIZE;
+                tileLoader.getTile(tileId).draw(ctx, drawX, drawY);
             }
         }
         

@@ -6,6 +6,10 @@
 "use strict";
 window.Utilities = (function() {
     
+    /**
+     * Creates a new Utilities.
+     * @returns {undefined}
+     */
     function Utilities() {
         
     }

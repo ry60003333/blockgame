@@ -6,7 +6,13 @@
 "use strict";
 window.Game = (function() {
     
-    function Game() {
+    /**
+     * Creates a new Game.
+     * @param {TileLoader} tileLoader The tile loader.
+     * @returns {_L7.Game}
+     */
+    function Game(tileLoader) {
+        this.tileLoader = tileLoader;
         this.player = new Player(0, 0);
         this.world = new World();
     }
@@ -66,7 +72,7 @@ window.Game = (function() {
         offsetY -= (this.player.y % 1) * Game.TILE_SIZE;
         
         ctx.translate(offsetX, offsetY);
-        this.world.draw(this.player, canvas, ctx);
+        this.world.draw(this.player, canvas, ctx, this.tileLoader);
         ctx.restore();
         
         

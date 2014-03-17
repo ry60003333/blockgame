@@ -54,6 +54,12 @@ var lastUpdateTimestamp;
 var game;
 
 /**
+ * The tile loader.
+ * @type TileLoader
+ */
+var tileLoader;
+
+/**
  * Initialize the game.
  * @returns {undefined}
  */
@@ -75,7 +81,14 @@ function init() {
     // Grab our canvas context.
     ctx = canvas.getContext('2d');
     
-    game = new Game();
+    // Create a new tile loader
+    tileLoader = new TileLoader();
+    
+    // Load all the tiles!
+    tileLoader.load();
+    
+    // Create an instance of the game
+    game = new Game(tileLoader);
     
     // Register our event listeners
     window.addEventListener("keydown", function(e) {

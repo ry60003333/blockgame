@@ -6,6 +6,10 @@
 "use strict";
 window.World = (function() {
     
+    /**
+     * Creates a new World.
+     * @returns {_L7.World}
+     */
     function World() {
         
         // The loaded chunks in the world.
@@ -24,9 +28,10 @@ window.World = (function() {
      * @param {Player} player The player.
      * @param {type} canvas The canvas.
      * @param {type} ctx The 2D drawing context of the canvas.
+     * @param {TileLoader} tileLoader The tile loader.
      * @returns {undefined}
      */
-    World.prototype.draw = function(player, canvas, ctx) {
+    World.prototype.draw = function(player, canvas, ctx, tileLoader) {
         
         // Create a local copy of this for now instead of adding this.
         // in front of everything.
@@ -93,7 +98,7 @@ window.World = (function() {
                 activeChunks[chunkKey] = true;
                 
                 // Draw the chunk
-                chunk.draw(ctx);
+                chunk.draw(ctx, tileLoader);
                 
                 // Draw the chunk coordinate if the grid is enabled.
                 if (this.drawGrid) {
