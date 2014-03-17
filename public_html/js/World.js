@@ -23,7 +23,7 @@ window.World = (function() {
         //console.log("StartX: " + startX + " StartY: " + startY);
         
         // Draw lines for debugging 
-       ctx.strokeStyle = "black";
+        ctx.strokeStyle = "black";
         ctx.beginPath();
         
         for (var x = 0; x < (canvas.width / Game.TILE_SIZE); x++) {
