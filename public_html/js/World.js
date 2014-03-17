@@ -13,44 +13,53 @@ window.World = (function() {
     }
     
     World.prototype.draw = function(player, canvas, ctx) {
-        //ctx.fillStyle = "green";
-        //ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
+        /*
+         * Calculate the starting (top left corner)
+         * local X and Y values.
+         */
         var startX = Math.floor(Utilities.center(player.x) - Math.ceil(((canvas.width / 2) / Game.TILE_SIZE)));
         var startY = Math.floor(Utilities.center(player.y) - Math.ceil(((canvas.height / 2) / Game.TILE_SIZE)));
         
-        //console.log("Canvas width: " + canvas.width + " Half:" + (canvas.width/2));
-        //console.log("Canvas height: " + canvas.height + " Half:" + (canvas.height/2));
-        //console.log("StartX: " + startX + " StartY: " + startY);
+        // TODO: Load chunks into view if needed, and unload unneeded ones
         
-        // Draw lines for debugging 
-        ctx.strokeStyle = "black";
-        ctx.beginPath();
+        // TODO: Draw those chunks!
         
-        for (var x = 0; x < (canvas.width / Game.TILE_SIZE); x++) {
-            ctx.moveTo(x*Game.TILE_SIZE, -Game.TILE_SIZE);
-            ctx.lineTo(x*Game.TILE_SIZE, canvas.height);
-        }
-        
-        for (var y = 0; y < (canvas.height / Game.TILE_SIZE); y++) {
-            ctx.moveTo(-Game.TILE_SIZE, y*Game.TILE_SIZE);
-            ctx.lineTo(canvas.width, y*Game.TILE_SIZE);
-        }
-        ctx.closePath();
-        ctx.stroke();
-        
-        var localStartY = startY;
-        ctx.font = "10px Comic Sans";
-        // Label each tile with it's location
-        for (var x = -1; x < (canvas.width / Game.TILE_SIZE); x++) {
-            var localStartY = startY;
-            for (var y = -1; y < (canvas.height / Game.TILE_SIZE); y++) {
-                var drawX = x * Game.TILE_SIZE + 1;
-                var drawY = y * Game.TILE_SIZE + 10;
-                ctx.fillText(startX + "," + localStartY, drawX, drawY);
-                localStartY++;
+        if (true) {
+            // Draw lines for debugging 
+            ctx.strokeStyle = "black";
+            ctx.beginPath();
+
+            /*
+             * For the following methods, we draw the lines longer then the size of the canvas
+             * so that when the world is traslated, there isn't white borders on the edges.
+             * This is also why we draw extra tiles!
+             */
+
+            for (var x = 0; x < (canvas.width / Game.TILE_SIZE) + 1; x++) {
+                ctx.moveTo(x*Game.TILE_SIZE, -Game.TILE_SIZE);
+                ctx.lineTo(x*Game.TILE_SIZE, canvas.height + (Game.TILE_SIZE*2));
             }
-            startX++;
+
+            for (var y = 0; y < (canvas.height / Game.TILE_SIZE) + 1; y++) {
+                ctx.moveTo(-Game.TILE_SIZE, y*Game.TILE_SIZE);
+                ctx.lineTo(canvas.width + (Game.TILE_SIZE * 2), y*Game.TILE_SIZE);
+            }
+            ctx.closePath();
+            ctx.stroke();
+
+            var localX = startX;
+            ctx.font = "10px Comic Sans";
+            // Label each tile with it's location
+            for (var x = -1; x < (canvas.width / Game.TILE_SIZE) + 1; x++) {
+                var localY = startY;
+                for (var y = -1; y < (canvas.height / Game.TILE_SIZE) + 1; y++) {
+                    var drawX = x * Game.TILE_SIZE + 1;
+                    var drawY = y * Game.TILE_SIZE + 10;
+                    ctx.fillText(localX + "," + localY, drawX, drawY);
+                    localY++;
+                }
+                localX++;
+            }
         }
     };
     
