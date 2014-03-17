@@ -31,7 +31,7 @@ window.Game = (function() {
     /**
      * The size of a tile, in pixels.
      */
-    Game.TILE_SIZE = 32;
+    Game.TILE_SIZE = 64;
     
     /**
      * The key code constants.
@@ -39,7 +39,8 @@ window.Game = (function() {
      */
     Game.KEYS = {
         "D": 68, 
-        "W" : 87
+        "W" : 87,
+        "Z" : 90 
     };
     
     /**
@@ -58,6 +59,22 @@ window.Game = (function() {
         if (keyUp[Game.KEYS.W]) {
             this.onlyDrawWorld = !this.onlyDrawWorld;
             keyUp[Game.KEYS.W] = false;
+        }
+        if (keyUp[Game.KEYS.Z]) {
+            switch (Game.TILE_SIZE) {
+                default:
+                    break;
+                case 32:
+                    Game.TILE_SIZE = 64;
+                    break;
+                case 64:
+                    Game.TILE_SIZE = 128;
+                    break;
+                case 128:
+                    Game.TILE_SIZE = 32;
+                    break;
+            }
+            keyUp[Game.KEYS.Z] = false;
         }
     };
     
@@ -121,6 +138,7 @@ window.Game = (function() {
         ctx.fillText("Arrow keys - Movement", 5, y += 15);
         ctx.fillText("D - Toggle world grid", 5, y += 15);
         ctx.fillText("W - Draw only world", 5, y += 15);
+        ctx.fillText("Z - Zoom", 5, y += 15);
     };
     
     return Game;

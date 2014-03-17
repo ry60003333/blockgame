@@ -10,11 +10,13 @@ window.Player = (function() {
      * Creates a new player.
      * @param {Number} x The X Coordinate of the player.
      * @param {Number} y The Y Coordinate of the player.
+     * @param {Image} image The image of the player.
      * @returns {_L7.Player}
      */
     function Player(x, y) {
         this.x = x;
         this.y = y;
+        this.image = null;
         
         this.speed = 5/1000;
     }
@@ -29,6 +31,16 @@ window.Player = (function() {
         "UP": 38, 
         "RIGHT": 39,
         "DOWN": 40
+    };
+    
+    /**
+     * Load the player's assets.
+     * @param {AssetLoader} assetLoader The asset loader.
+     * @returns {undefined}
+     */
+    Player.prototype.load = function(assetLoader) {
+        this.image = new Image();
+        assetLoader.addImage(this.image, "assets/player/player.png");
     };
     
     
@@ -59,8 +71,12 @@ window.Player = (function() {
      * @returns {undefined}
      */
     Player.prototype.draw = function(ctx) {
-        ctx.fillStyle = "red";
-        ctx.fillRect(0, 0, Game.TILE_SIZE, Game.TILE_SIZE);
+        if (!this.image) {
+            ctx.fillStyle = "red";
+            ctx.fillRect(0, 0, Game.TILE_SIZE, Game.TILE_SIZE);
+            return;
+        }
+        ctx.drawImage(this.image, 0, 0, Game.TILE_SIZE, Game.TILE_SIZE);
     };
     
     return Player;

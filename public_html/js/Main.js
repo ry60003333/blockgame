@@ -102,11 +102,17 @@ function init() {
     // Create a new tile manager
     tileManager = new TileManager();
     
+    // Create an instance of the game
+    game = new Game(tileManager);
+    
     // Create our asset loader
     assetLoader = new AssetLoader();
     
     // Load all the tiles!
     tileManager.load(assetLoader);
+    
+    // Load the player images!
+    game.player.load(assetLoader);
     
     // Load our assets and start the game.
     assetLoader.load(function() {
@@ -114,8 +120,6 @@ function init() {
         // We are now in the callback function
         // for when everything has finished loading.
         
-        // Create an instance of the game
-        game = new Game(tileManager);
 
         // Register our event listeners
         window.addEventListener("keydown", function(e) {

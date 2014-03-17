@@ -103,7 +103,7 @@ window.World = (function() {
                 // Draw the chunk coordinate if the grid is enabled.
                 if (this.drawGrid) {
                     ctx.fillStyle = "black";
-                    ctx.fillText(chunkX + "," + chunkY, 13, (Game.TILE_SIZE - 5));
+                    ctx.fillText(chunkX + "," + chunkY, (Game.TILE_SIZE - 15), (Game.TILE_SIZE - 5));
                 }
                 ctx.restore();
             }
