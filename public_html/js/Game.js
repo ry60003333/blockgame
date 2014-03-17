@@ -17,6 +17,16 @@ window.Game = (function() {
     Game.TILE_SIZE = 32;
     
     /**
+     * Update the contents of the game.
+     * @param {Array} keyStatus The status of the keyboard.
+     * @param {Number} deltaTimeMillis The delta time since the last update, in MS.
+     * @returns {undefined}
+     */
+    Game.prototype.update = function(keyStatus, deltaTimeMillis) {
+        this.player.update(keyStatus, deltaTimeMillis);
+    };
+    
+    /**
      * Draw the contents of the game.
      * @param {type} canvas The canvas.
      * @param {type} ctx The 2D drawing context.
@@ -39,6 +49,10 @@ window.Game = (function() {
          */
         var offsetX = ((canvas.width / 2) % Game.TILE_SIZE) - (Game.TILE_SIZE / 2);
         var offsetY = ((canvas.height / 2) % Game.TILE_SIZE) - (Game.TILE_SIZE / 2);
+        
+        // But we also need to see when the player is moving between tiles
+        offsetX -= (this.player.x % 1) * Game.TILE_SIZE;
+        offsetY -= (this.player.y % 1) * Game.TILE_SIZE;
         
         ctx.translate(offsetX, offsetY);
         this.world.draw(this.player, canvas, ctx);

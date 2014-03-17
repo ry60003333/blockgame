@@ -20,6 +20,12 @@ var canvas;
 var ctx;
 
 /**
+ * The status of the keyboard keys.
+ * @type Array
+ */
+var keyStatus = [];
+
+/**
  * The game state constants.
  * @type type
  */
@@ -70,6 +76,14 @@ function init() {
     ctx = canvas.getContext('2d');
     
     game = new Game();
+    
+    // Register our event listeners
+    window.addEventListener("keydown", function(e) {
+        keyStatus[e.keyCode] = true;
+    });
+    window.addEventListener("keyup", function(e) {
+        keyStatus[e.keyCode] = false;
+    });
     
     // Start the game in the running state for now.
     gameState = GAME_STATE.RUNNING;
@@ -154,7 +168,8 @@ function update() {
     var deltaTimeMillis = currentTimestamp-lastUpdateTimestamp;
     lastUpdateTimestamp = currentTimestamp;
     
-    // TODO: Update the contents of the game.
+    // Update the contents of the game.
+    game.update(keyStatus, deltaTimeMillis);
 }
 
 // Make the init function run on startup.

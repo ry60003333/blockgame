@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+"use strict";
 window.World = (function() {
     
     function World() {
@@ -15,8 +16,8 @@ window.World = (function() {
         //ctx.fillStyle = "green";
         //ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        var startX = Math.floor(player.x - ((canvas.width / 2) / Game.TILE_SIZE));
-        var startY = Math.floor(player.y - ((canvas.height / 2) / Game.TILE_SIZE));
+        var startX = Math.floor(Utilities.center(player.x) - Math.ceil(((canvas.width / 2) / Game.TILE_SIZE)));
+        var startY = Math.floor(Utilities.center(player.y) - Math.ceil(((canvas.height / 2) / Game.TILE_SIZE)));
         
         //console.log("Canvas width: " + canvas.width + " Half:" + (canvas.width/2));
         //console.log("Canvas height: " + canvas.height + " Half:" + (canvas.height/2));
@@ -67,7 +68,7 @@ window.World = (function() {
         }
         
         return chunk;
-    }
+    };
     
     return World;
 })();
