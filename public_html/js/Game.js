@@ -7,7 +7,7 @@
 window.Game = (function() {
     
     function Game() {
-        this.player = new Player();
+        this.player = new Player(0, 0);
         this.world = new World();
     }
     
@@ -39,9 +39,12 @@ window.Game = (function() {
          */
         var offsetX = ((canvas.width / 2) % Game.TILE_SIZE) - (Game.TILE_SIZE / 2);
         var offsetY = ((canvas.height / 2) % Game.TILE_SIZE) - (Game.TILE_SIZE / 2);
+        
         ctx.translate(offsetX, offsetY);
-        this.world.draw(canvas, ctx);
+        this.world.draw(this.player, canvas, ctx);
         ctx.restore();
+        
+        
         
         // Draw the player, in the center
         var x = (canvas.width / 2) - (Game.TILE_SIZE / 2);

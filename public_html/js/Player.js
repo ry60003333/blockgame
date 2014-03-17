@@ -5,8 +5,9 @@
  */
 window.Player = (function() {
     
-    function Player() {
-        
+    function Player(x, y) {
+        this.x = x;
+        this.y = y;
     }
     
     Player.prototype.draw = function(ctx) {
