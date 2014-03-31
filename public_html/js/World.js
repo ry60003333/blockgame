@@ -12,8 +12,22 @@ window.World = (function() {
      */
     function World() {
         
-        // The loaded chunks in the world.
+        /**
+         * The loaded chunks in the word.
+         * @type Array
+         */
         this.chunks = [];
+        
+        /**
+         * The world generator.
+         * @type FlatWorldGenerator
+         */
+        this.generator = new FlatWorldGenerator();
+        
+        /**
+         * Should the world grid be drawn.
+         * @type Boolean
+         */
         this.drawGrid = false;
         
         /* The amount of tiles to draw "offscreen"
@@ -90,7 +104,13 @@ window.World = (function() {
                 var chunkKey = chunkX + "," + chunkY;
                 var chunk = this.chunks[chunkKey];
                 if (!chunk) {
-                    chunk = new Chunk(chunkX, chunkY);
+                    if (false) {
+                        // Load the chunk from storage.
+                    }
+                    else {
+                        // Generate a new chunk.
+                        chunk = this.generator.generateChunk(new Coordinate(chunkX, chunkY));
+                    }
                     this.chunks[chunkKey] = chunk;
                 }
                 
