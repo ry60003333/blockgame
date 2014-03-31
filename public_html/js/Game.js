@@ -22,12 +22,12 @@ window.Game = (function() {
     /**
      * The build number of the game.
      */
-    Game.BUILD = 4;
+    Game.BUILD = 10;
     
     /**
      * The version number of the game.
      */
-    Game.VERSION = "0.4";
+    Game.VERSION = "0.5";
     
     /**
      * The size of a tile, in pixels.
