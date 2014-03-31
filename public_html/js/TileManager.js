@@ -8,7 +8,7 @@ window.TileManager = (function () {
     
     /**
      * Creates a new TileManager.
-     * @returns {_L7.TileManager}
+     * @returns {TileManager} The new TileManager object.
      */
     function TileManager() {
         /**

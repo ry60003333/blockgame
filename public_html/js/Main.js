@@ -72,12 +72,6 @@ var game;
 var assetLoader;
 
 /**
- * The tile manager.
- * @type TileManager
- */
-var tileManager;
-
-/**
  * Initialize the game.
  * @returns {undefined}
  */
@@ -99,20 +93,14 @@ function init() {
     // Grab our canvas context.
     ctx = canvas.getContext('2d');
     
-    // Create a new tile manager
-    tileManager = new TileManager();
-    
     // Create an instance of the game
-    game = new Game(tileManager);
+    game = new Game();
     
     // Create our asset loader
     assetLoader = new AssetLoader();
     
-    // Load all the tiles!
-    tileManager.load(assetLoader);
-    
-    // Load the player images!
-    game.player.load(assetLoader);
+    // Queue up assets for loading
+    game.load(assetLoader);
     
     // Load our assets and start the game.
     assetLoader.load(function() {

@@ -20,10 +20,16 @@ window.Chunk = (function() {
      */
     function Chunk(x, y) {
         /**
-         * The two dimensional array of tiles in the chunk.
+         * The associative array of tiles in the chunk.
          * @type Array
          */
         this.tiles = [];
+        
+        /**
+         * The array of items in the chunk.
+         * @type Array
+         */
+        this.items = [];
         
         this.x = x;
         this.y = y;

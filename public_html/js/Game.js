@@ -8,11 +8,12 @@ window.Game = (function() {
     
     /**
      * Creates a new Game.
-     * @param {TileManager} tileManager The tile loader.
-     * @returns {_L7.Game}
+     * @returns {Game} The new Game object.
      */
-    function Game(tileManager) {
-        this.tileManager = tileManager;
+    function Game() {
+        this.tileManager = new TileManager();
+        this.itemManager = new ItemManager();
+        this.npcManager = new NpcManager();
         this.player = new Player(0, 0);
         this.world = new World();
         this.onlyDrawWorld = false;
@@ -42,6 +43,25 @@ window.Game = (function() {
         "W" : 87,
         "Z" : 90, 
         "SPACE" : 32
+    };
+    
+    /**
+     * Queue up the game assets in the loader.
+     * @param {AssetLoader} assetLoader The asset loader.
+     * @returns {undefined}
+     */
+    Game.prototype.load = function(assetLoader) {
+        // Load all the tiles!
+        this.tileManager.load(assetLoader);
+        
+        // Load all the item definitions!
+        this.itemManager.load(assetLoader);
+        
+        // Load all the Npc definitions!
+        this.npcManager.load(assetLoader);
+
+        // Load the player images!
+        this.player.load(assetLoader);
     };
     
     /**
