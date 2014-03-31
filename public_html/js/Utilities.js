@@ -37,6 +37,14 @@ window.Utilities = (function() {
         return Math.floor((Math.random()*max)+min);
     };
     
+    /**
+     * Get the current timestamp in milliseconds.
+     * @returns {Number} The timestamp.
+     */
+    Utilities.currentTimeMillis = function() {
+        return new Date().getTime();
+    };
+    
     return Utilities;
     
     

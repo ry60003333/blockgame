@@ -98,7 +98,7 @@ window.World = (function() {
                 activeChunks[chunkKey] = true;
                 
                 // Draw the chunk
-                chunk.draw(ctx, tileManager);
+                chunk.draw(player, ctx, tileManager);
                 
                 // Draw the chunk coordinate if the grid is enabled.
                 if (this.drawGrid) {

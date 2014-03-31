@@ -12,13 +12,19 @@ window.Tile = (function () {
      * @param {String} name The name of the tile.
      * @param {String} fillStyle The fill style of the tile, if it does not use an image.
      * @param {Image} image The image of the tile.
-     * @returns {_L7.Tile}
+     * @param {Number} nextId The ID that the tile turns into when broken.
+     * @param {String} category The category of the tile.
+     * @param {Number} timeToBreak The time (in milliseconds) that it takes to break the tile.
+     * @returns {Tile} The new tile object.
      */
-    function Tile(id, name, fillStyle, image) {
+    function Tile(id, name, fillStyle, image, nextId, category, timeToBreak) {
         this.id = id;
         this.name = name;
         this.fillStyle = fillStyle;
         this.image = image;
+        this.nextId = nextId;
+        this.category = category;
+        this.timeToBreak = timeToBreak;
     }
     
     /**

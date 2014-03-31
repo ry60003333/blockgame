@@ -246,7 +246,14 @@ window.TileManager = (function () {
                 assetLoader.addImage(tileImage, "assets/tiles/" + next.image);
             }
             
-            loader.tiles[next.id] = new Tile(next.id, next.name, null, tileImage);
+            loader.tiles[next.id] = new Tile(
+                    next.id, 
+                    next.name, 
+                    null, 
+                    tileImage, 
+                    -1, 
+                    "null", 
+                    3000);
             
         });
     };

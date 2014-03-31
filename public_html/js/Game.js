@@ -40,7 +40,8 @@ window.Game = (function() {
     Game.KEYS = {
         "D": 68, 
         "W" : 87,
-        "Z" : 90 
+        "Z" : 90, 
+        "SPACE" : 32
     };
     
     /**
@@ -157,6 +158,7 @@ window.Game = (function() {
         ctx.fillText("D - Toggle world grid", 5, y += 15);
         ctx.fillText("W - Draw only world", 5, y += 15);
         ctx.fillText("Z - Zoom", 5, y += 15);
+        ctx.fillText("Space - Break Tile", 5, y += 15);
     };
     
     return Game;
