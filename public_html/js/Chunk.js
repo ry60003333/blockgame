@@ -40,22 +40,35 @@ window.Chunk = (function() {
                     // Grass
                     default:
                     case 1:
-                        this.tiles[x + "," + y] = 1; // 1 is the ID for Grass
-
+                        this.tiles[x + "," + y] = Math.floor((Math.random()*4)+1); // 1-4 are the IDs for Grass
+                        
                         // Make some pretty flowers!
                         if (Utilities.random(1, 20) === 1) {
-                            this.tiles[x + "," + y] = 3;
-                        } else if (Utilities.random(1, 30) === 1) {
-                            this.tiles[x + "," + y] = 2; // Dirt
-                        } else if (Utilities.random(1, 100) === 1) {
-                            this.tiles[x + "," + y] = 5; // Stone
+                            this.tiles[x + "," + y] =  Math.floor((Math.random()*3)+9); // 9-11 are the IDs for Flower Grass
+                        }
+                        else if (Utilities.random(1, 30) === 1) {
+                            this.tiles[x + "," + y] = Math.floor((Math.random()*4)+5); // 5-8 are the IDs for Dirt
+                        }
+                        else if (Utilities.random(1, 50) === 1) {
+                            this.tiles[x + "," + y] = Math.floor((Math.random()*4)+16); // 16-19 are the IDs for Stone
+
+                        if (Utilities.random(1, 5) === 1) {
+                            this.tiles[x + "," + y] =  28; // 28 is the ID for Copper
+                        }
+                        else if (Utilities.random(1, 10) === 1) {
+                            this.tiles[x + "," + y] = 29; // 29 is the ID for Iron
+                        }
+                        else if (Utilities.random(1, 15) === 1) {
+                            this.tiles[x + "," + y] = Math.floor((Math.random()*4)+30); // 30-33 are the IDs for Magma
+                        }
+
                         }
                         break;
                     case 2: // Water
-                        this.tiles[x + "," + y] = 4;
+                        this.tiles[x + "," + y] = Math.floor((Math.random()*1)+12); // 12-15 are the IDs for Water, disabled the other 3 for now as they look funky when all together
                         break;
                     case 3: // Salt!
-                        this.tiles[x + "," + y] = 8;
+                        this.tiles[x + "," + y] = Math.floor((Math.random()*4)+24); // 24-27 are the IDs for Salt
                         break;
                 }
                 
