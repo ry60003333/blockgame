@@ -17,10 +17,10 @@ window.Player = (function() {
         this.y = y;
         
         /**
-         * The image of the player.
-         * @type Image
+         * The animable object of the player.
+         * @type Animable
          */
-        this.image = null;
+        this.animable = new Animable("assets/player/player.png");
         
         /**
          * The movement speed of the player.
@@ -55,8 +55,7 @@ window.Player = (function() {
      * @returns {undefined}
      */
     Player.prototype.load = function(assetLoader) {
-        this.image = new Image();
-        assetLoader.addImage(this.image, "assets/player/player.png");
+        this.animable.load(assetLoader);
     };
     
     
@@ -107,12 +106,7 @@ window.Player = (function() {
      * @returns {undefined}
      */
     Player.prototype.draw = function(ctx) {
-        if (!this.image) {
-            ctx.fillStyle = "red";
-            ctx.fillRect(0, 0, Game.TILE_SIZE, Game.TILE_SIZE);
-            return;
-        }
-        ctx.drawImage(this.image, 0, 0, Game.TILE_SIZE, Game.TILE_SIZE);
+        this.animable.draw(ctx, 0, 0, Game.TILE_SIZE, Game.TILE_SIZE);
     };
     
     /**
