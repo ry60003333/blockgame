@@ -21,6 +21,9 @@ window.TestWorldGenerator = (function() {
      * @returns {Chunk} The generated Chunk.
      */
     TestWorldGenerator.prototype.generateChunk = function(location) {
+        
+        // Put all testing stuff in here :)
+        
         var chunk = new Chunk(location.x, location.y);
         
         var typeVariance = [1, 1, 1, 1, 1, 1, 2, 3];

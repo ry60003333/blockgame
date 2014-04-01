@@ -20,9 +20,9 @@ window.World = (function() {
         
         /**
          * The world generator.
-         * @type FlatWorldGenerator
+         * @type TestWorldGenerator
          */
-        this.generator = new FlatWorldGenerator();
+        this.generator = new TestWorldGenerator();
         
         /**
          * Should the world grid be drawn.
