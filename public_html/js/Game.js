@@ -22,12 +22,12 @@ window.Game = (function() {
     /**
      * The build number of the game.
      */
-    Game.BUILD = 10;
+    Game.BUILD = 20;
     
     /**
      * The version number of the game.
      */
-    Game.VERSION = "0.5";
+    Game.VERSION = "1.0";
     
     /**
      * The size of a tile, in pixels.
@@ -168,7 +168,7 @@ window.Game = (function() {
         // Draw build and debugging info
         ctx.font = "bold 20px Comic Sans";
         var y = 30;
-        ctx.fillText("Block Game " + Game.VERSION + " (Build " + Game.BUILD + ")", 5, y);
+        ctx.fillText("Droid World " + Game.VERSION + " (Build " + Game.BUILD + ")", 5, y);
         ctx.font = "bold 15px Comic Sans";
         ctx.fillText("Player: " + this.player.x.toFixed(2) + "," + this.player.y.toFixed(2), 5, y += 15);
         ctx.fillText("Canvas Size: " + canvas.width + "," + canvas.height, 5, y += 15);

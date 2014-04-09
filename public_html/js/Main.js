@@ -38,6 +38,32 @@ var keyPressed = [];
 var keyUp = [];
 
 /**
+ * The key code constants.
+ * @type type
+ */
+var KEYS = {
+    "ESC" : 27
+};
+
+/**
+ * The menu div.
+ * @type type
+ */
+var menuDiv = null;
+
+/**
+ * The array of menu buttons.
+ * @type Array
+ */
+var menuButtons = [];
+
+/**
+ * The array of button listeners.
+ * @type Array
+ */
+var buttonListeners = [];
+
+/**
  * The game state constants.
  * @type type
  */
@@ -120,17 +146,74 @@ function init() {
         window.addEventListener("keypress", function(e) {
             keyPressed[e.keyCode] = true;
         });
-
-        // Start the game in the running state for now.
-        gameState = GAME_STATE.RUNNING;
-
-        // ... but lets test the menu, or drawing in general
-        //gameState = GAME_STATE.MENU;
+        
+        // Register our menu event listeners
+        // and start off on the main menu
+        setupMenu();
 
         // Start the game loop!
         tick();
         
     });
+}
+
+/**
+ * Set the current game state.
+ * @param {Number} newGameState The new game state.
+ * @returns {undefined}
+ */
+function setGameState(newGameState) {
+    if (newGameState === GAME_STATE.RUNNING) {
+        // Hide the menu!
+        menuDiv.style.display = 'none';
+        
+        // Hide the individual buttons as well
+        // for menus that don't use all the buttons
+        for (var i = 0; i < menuButtons.length; i++) {
+            menuButtons[i].style.display = 'none';
+        }
+    }
+    else if (newGameState === GAME_STATE.MENU) {
+        displayMenu("New Game", function() {
+            setGameState(GAME_STATE.RUNNING);
+        });
+    }
+    else if (newGameState === GAME_STATE.PAUSED) {
+        displayMenu("Resume Game", function() {
+            setGameState(GAME_STATE.RUNNING);
+        });
+    }
+    gameState = newGameState;
+}
+
+/**
+ * Display a menu. Takes in button names and listener functions in pairs.
+ * @returns {undefined}
+ */
+function displayMenu() {
+    for (var i = 0; i < arguments.length; i += 2) {
+        menuButtons[i].innerHTML = arguments[i];
+        buttonListeners[i] = arguments[i+1];
+        menuButtons[i].style.display = 'inline-block';
+    }
+    menuDiv.style.display = 'block';
+}
+
+/**
+ * Setup the listeners for the menu.
+ * @returns {undefined}
+ */
+function setupMenu() {
+    menuDiv = document.querySelector("#menu");
+    for (var i = 0; i < 1; i++) {
+        var nextButton = document.querySelector("#button" + i);
+        menuButtons[i] = nextButton;
+        var index = i;
+        nextButton.addEventListener("click", function() {
+            buttonListeners[index]();
+        });
+    }
+    setGameState(GAME_STATE.MENU);
 }
 
 /**
@@ -140,6 +223,17 @@ function init() {
 function tick() {
     // Erase everything!
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Check for key presses!
+    if (keyUp[KEYS.ESC]) {
+        if (gameState === GAME_STATE.RUNNING) {
+            setGameState(GAME_STATE.PAUSED);
+        }
+        else if (gameState === GAME_STATE.PAUSED) {
+            setGameState(GAME_STATE.RUNNING);
+        }
+        keyUp[KEYS.ESC] = false;
+    }
     
     switch(gameState) {
         case GAME_STATE.MENU:
@@ -151,10 +245,13 @@ function tick() {
 
             ctx.font = "42px Comic Sans";
             ctx.fillStyle = "Black";
-            drawHorzCenteredText("Block Game", 0, canvas.height / 2);
+            
+            var y = (canvas.height / 2) - 30;
+            drawHorzCenteredText("Droid World", 0, y);
 
+            y += 15;
             ctx.font = "13px Comic Sans";
-            drawHorzCenteredText("for Rich Media Web App", 0, (canvas.height / 2) + 15);
+            drawHorzCenteredText("for Rich Media Web App", 0, y);
             
             break;
         case GAME_STATE.RUNNING:
@@ -167,7 +264,15 @@ function tick() {
             // Draw the game under the pause menu
             drawGame();
             
-            // TODO: Implement paused menu here.
+            // Overlay the pause menu
+            ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.font = "42px Comic Sans";
+            ctx.fillStyle = "Black";
+            
+            var y = (canvas.height / 2) - 30;
+            drawHorzCenteredText("Paused", 0, y);
             break;
     }
     

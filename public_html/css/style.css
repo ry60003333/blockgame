@@ -19,8 +19,20 @@ body, html {
     display: block;  /* No floating content on sides */
 }
 
+/* Styling for the canvas */
 canvas {
     position: absolute;
     left: 0px;
     top: 0px;
+    z-index: -1;
+}
+
+/* Styling for the menu */
+#menu {
+    position: relative;
+    top: 50%;
+    text-align: center;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
