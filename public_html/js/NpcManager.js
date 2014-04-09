@@ -21,12 +21,48 @@ window.NpcManager = (function() {
     }
     
     /**
+     * The JSON item data.
+     */
+    NpcManager.jsonData = {
+        "npcs" : [
+            {
+                "id" : "0", 
+                "name" : "null", 
+                "image" : "null"
+            }
+        ]
+    };
+    
+    /**
      * Load the Npc definitions.
      * @param {AssetLoader} assetLoader The asset loader.
      * @returns {undefined}
      */
     NpcManager.prototype.load = function(assetLoader) {
-        
+        var npcs = this.npcs;
+        var loader = this;
+        // Load the tiles JSON file
+        NpcManager.jsonData["npcs"].forEach(function(next) {
+            
+            var image = null;
+            
+            if (next.image !== "") {
+                // Load the image of the tile
+                image = new Image();
+                var imageName = next.image;
+                if (imageName === "null") {
+                    imageName = "generic_npc.png";
+                }
+                
+                assetLoader.addImage(image, "assets/npcs/" + imageName);
+            }
+            
+            loader.npcs[next.id] = new NpcDefinition(
+                    parseInt(next.id), 
+                    next.name, 
+                    image);
+            
+        });
     };
     
     /**

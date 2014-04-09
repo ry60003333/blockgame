@@ -17,10 +17,11 @@ window.FlatWorldGenerator = (function() {
     
     /**
      * Generate a chunk.
+     * @param {Game} game The game instance.
      * @param {Coordinate} location The location of the Chunk to generate.
      * @returns {Chunk} The generated Chunk.
      */
-    FlatWorldGenerator.prototype.generateChunk = function(location) {
+    FlatWorldGenerator.prototype.generateChunk = function(game, location) {
         var chunk = new Chunk(location.x, location.y);
         
         // By default, initialize the chunk with grass.

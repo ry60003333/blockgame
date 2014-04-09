@@ -28,199 +28,339 @@ window.TileManager = (function () {
             {
                 "id": "0",
                 "name": "Air",
-                "image": ""
+                "image": "", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             
             // Four different grass variations, ids 1-4
             {
                 "id": "1",
                 "name": "Grass",
-                "image": "grass.png"
+                "image": "grass.png", 
+                "nextId" : "5", 
+                "category" : "null", 
+                "timeToBreak" : "1000", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "2",
                 "name": "Grass",
-                "image": "grass2.png"
+                "image": "grass2.png", 
+                "nextId" : "6", 
+                "category" : "null", 
+                "timeToBreak" : "1000", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "3",
                 "name": "Grass",
-                "image": "grass3.png"
+                "image": "grass3.png", 
+                "nextId" : "7", 
+                "category" : "null", 
+                "timeToBreak" : "1000", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "4",
                 "name": "Grass",
-                "image": "grass4.png"
+                "image": "grass4.png", 
+                "nextId" : "8", 
+                "category" : "null", 
+                "timeToBreak" : "1000", 
+                "breakItemId" : "-1"
             },
             
             // Four different dirt variations, ids 5-8
             {
                 "id": "5",
                 "name": "Dirt",
-                "image": "dirt.png"
+                "image": "dirt.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "6",
                 "name": "Dirt",
-                "image": "dirt2.png"
+                "image": "dirt2.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "7",
                 "name": "Dirt",
-                "image": "dirt3.png"
+                "image": "dirt3.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "8",
                 "name": "Dirt",
-                "image": "dirt4.png"
+                "image": "dirt4.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             
             // Three different flower grass variations, ids 9-11
             {
                 "id": "9",
                 "name": "Flower Grass",
-                "image": "flower_grass.png"
+                "image": "flower_grass.png", 
+                "nextId" : "1", 
+                "category" : "null", 
+                "timeToBreak" : "1500", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "10",
                 "name": "Flower Grass",
-                "image": "flower_grass2.png"
+                "image": "flower_grass2.png", 
+                "nextId" : "2", 
+                "category" : "null", 
+                "timeToBreak" : "1500", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "11",
                 "name": "Flower Grass",
-                "image": "flower_grass3.png"
+                "image": "flower_grass3.png", 
+                "nextId" : "3", 
+                "category" : "null", 
+                "timeToBreak" : "1500", 
+                "breakItemId" : "-1"
             },
             
             // Four different water variations, ids 12-15
             {
                 "id": "12",
                 "name": "Water",
-                "image": "water.png"
+                "image": "water.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "13",
                 "name": "Water",
-                "image": "water2.png"
+                "image": "water2.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "14",
                 "name": "Water",
-                "image": "water3.png"
+                "image": "water3.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "15",
                 "name": "Water",
-                "image": "water4.png"
+                "image": "water4.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             
             // Four different stone variations, ids 16-19
             {
                 "id": "16",
                 "name": "Stone",
-                "image": "stone.png"
+                "image": "stone.png", 
+                "nextId" : "5", 
+                "category" : "null", 
+                "timeToBreak" : "3000", 
+                "breakItemId" : "1"
             },
             {
                 "id": "17",
                 "name": "Stone",
-                "image": "stone2.png"
+                "image": "stone2.png", 
+                "nextId" : "6", 
+                "category" : "null", 
+                "timeToBreak" : "3000", 
+                "breakItemId" : "1"
             },
             {
                 "id": "18",
                 "name": "Stone",
-                "image": "stone3.png"
+                "image": "stone3.png", 
+                "nextId" : "7", 
+                "category" : "null", 
+                "timeToBreak" : "3000", 
+                "breakItemId" : "1"
             },
             {
                 "id": "19",
                 "name": "Stone",
-                "image": "stone4.png"
+                "image": "stone4.png", 
+                "nextId" : "8", 
+                "category" : "null", 
+                "timeToBreak" : "3000", 
+                "breakItemId" : "1"
             },
             
             // Four different sand variations, ids 20-23
             {
                 "id": "20",
                 "name": "Sand",
-                "image": "sand.png"
+                "image": "sand.png", 
+                "nextId" : "5", 
+                "category" : "null", 
+                "timeToBreak" : "800", 
+                "breakItemId" : "2"
             },
             {
                 "id": "21",
                 "name": "Sand",
-                "image": "sand2.png"
+                "image": "sand2.png", 
+                "nextId" : "6", 
+                "category" : "null", 
+                "timeToBreak" : "800", 
+                "breakItemId" : "2"
             },
             {
                 "id": "22",
                 "name": "Sand",
-                "image": "sand3.png"
+                "image": "sand3.png", 
+                "nextId" : "7", 
+                "category" : "null", 
+                "timeToBreak" : "800", 
+                "breakItemId" : "2"
             },
             {
                 "id": "23",
                 "name": "Sand",
-                "image": "sand4.png"
+                "image": "sand4.png", 
+                "nextId" : "8", 
+                "category" : "null", 
+                "timeToBreak" : "800", 
+                "breakItemId" : "2"
             },
             
             // Four different salt variations, ids 24-27
             {
                 "id": "24",
                 "name": "Salt",
-                "image": "salt.png"
+                "image": "salt.png", 
+                "nextId" : "5", 
+                "category" : "null", 
+                "timeToBreak" : "2500", 
+                "breakItemId" : "3"
             },
             {
                 "id": "25",
                 "name": "Salt",
-                "image": "salt2.png"
+                "image": "salt2.png", 
+                "nextId" : "6", 
+                "category" : "null", 
+                "timeToBreak" : "2500", 
+                "breakItemId" : "3"
             },
             {
                 "id": "26",
                 "name": "Salt",
-                "image": "salt3.png"
+                "image": "salt3.png", 
+                "nextId" : "7", 
+                "category" : "null", 
+                "timeToBreak" : "2500", 
+                "breakItemId" : "3"
             },
             {
                 "id": "27",
                 "name": "Salt",
-                "image": "salt4.png"
+                "image": "salt4.png", 
+                "nextId" : "8", 
+                "category" : "null", 
+                "timeToBreak" : "2500", 
+                "breakItemId" : "3"
             },
             
             // One copper tile, id 28
             {
                 "id": "28",
                 "name": "Copper",
-                "image": "copper.png"
+                "image": "copper.png", 
+                "nextId" : "5", 
+                "category" : "null", 
+                "timeToBreak" : "3500", 
+                "breakItemId" : "4"
             },
             
             // One iron tile, id 29
             {
                 "id": "29",
                 "name": "Iron",
-                "image": "iron.png"
+                "image": "iron.png", 
+                "nextId" : "6", 
+                "category" : "null", 
+                "timeToBreak" : "4000", 
+                "breakItemId" : "5"
             },
             
             // Four different magma variations, ids 30-33
             {
                 "id": "30",
                 "name": "Magma",
-                "image": "magma.png"
+                "image": "magma.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "31",
                 "name": "Magma",
-                "image": "magma2.png"
+                "image": "magma2.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "32",
                 "name": "Magma",
-                "image": "magma3.png"
+                "image": "magma3.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             {
                 "id": "33",
                 "name": "Magma",
-                "image": "magma4.png"
+                "image": "magma4.png", 
+                "nextId" : "-1", 
+                "category" : "null", 
+                "timeToBreak" : "-1", 
+                "breakItemId" : "-1"
             },
             
             // One brick tile, id 34
             {
                 "id": "34",
                 "name": "Brick",
-                "image": "brick.png"
+                "image": "brick.png", 
+                "nextId" : "7", 
+                "category" : "null", 
+                "timeToBreak" : "2700", 
+                "breakItemId" : "6"
             }
         ]
     }
@@ -247,13 +387,15 @@ window.TileManager = (function () {
             }
             
             loader.tiles[next.id] = new Tile(
-                    next.id, 
+                    parseInt(next.id), 
                     next.name, 
                     null, 
                     tileImage, 
-                    -1, 
-                    "null", 
-                    3000);
+                    parseInt(next.nextId), 
+                    next.category, 
+                    parseInt(next.timeToBreak), 
+                    parseInt(next.breakItemId)
+                    );
             
         });
     };

@@ -70,7 +70,9 @@ var buttonListeners = [];
 var GAME_STATE = {
     "MENU" : 0, 
     "RUNNING" : 1, 
-    "PAUSED" : 2  
+    "PAUSED" : 2, 
+    "WIN" : 3,
+    "LOSE" : 4
 };
 
 /**
@@ -96,6 +98,24 @@ var game;
  * @type AssetLoader
  */
 var assetLoader;
+
+/**
+ * The last timestamp when the demo was changed.
+ * @type Number
+ */
+var lastDemoTimestamp = 0;
+
+/**
+ * The demo delta X.
+ * @type Number
+ */
+var demoDeltaX = 0;
+
+/**
+ * The demo delta Y
+ * @type Number
+ */
+var demoDeltaY = 0;
 
 /**
  * Initialize the game.
@@ -175,6 +195,7 @@ function setGameState(newGameState) {
     }
     else if (newGameState === GAME_STATE.MENU) {
         displayMenu("New Game", function() {
+            game.reset();
             setGameState(GAME_STATE.RUNNING);
         });
     }
@@ -241,28 +262,53 @@ function tick() {
             
             // Here is some placeholder stuff.
             ctx.fillStyle = "rgba(71, 234, 255, 0.5)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+            //ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Demo the landscape
+            drawGame(true);
+            if (Utilities.currentTimeMillis() - lastDemoTimestamp > 5000) {
+                lastDemoTimestamp = Utilities.currentTimeMillis();
+                if (Utilities.random(1, 2) === 1) {
+                    demoDeltaX = 0.02;
+                }
+                else {
+                    demoDeltaX = -0.02;
+                }
+                
+                if (Utilities.random(1, 2) === 1) {
+                    demoDeltaY = 0.02;
+                }
+                else {
+                    demoDeltaY = -0.02;
+                }
+            }
+            game.player.x += demoDeltaX;
+            game.player.y += demoDeltaY;
+            
+            var y = (canvas.height / 2) - 30;
+            ctx.fillRect((canvas.width / 2) - 150, y-40, 300, 70);
+            //ctx.fillRect(0, 0, 400, 100);
+            
             ctx.font = "42px Comic Sans";
             ctx.fillStyle = "Black";
             
-            var y = (canvas.height / 2) - 30;
+            
             drawHorzCenteredText("Droid World", 0, y);
 
             y += 15;
-            ctx.font = "13px Comic Sans";
-            drawHorzCenteredText("for Rich Media Web App", 0, y);
+            ctx.font = "16px Comic Sans";
+            drawHorzCenteredText("by Ryan Rule-Hoffman & Bryce Lockwood", 0, y);
             
             break;
         case GAME_STATE.RUNNING:
             // Update everything before we draw it.
             update();
             
-            drawGame();
+            drawGame(false);
             break;
         case GAME_STATE.PAUSED:
             // Draw the game under the pause menu
-            drawGame();
+            drawGame(false);
             
             // Overlay the pause menu
             ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
@@ -273,6 +319,9 @@ function tick() {
             
             var y = (canvas.height / 2) - 30;
             drawHorzCenteredText("Paused", 0, y);
+            break;
+        case GAME_STATE.WIN:
+            
             break;
     }
     
@@ -295,10 +344,11 @@ function drawHorzCenteredText(message, xOffset, y) {
 
 /**
  * Draw the game.
+ * @param {Boolean} demo Is the game being drawn as a demo.
  * @returns {undefined}
  */
-function drawGame() {
-    game.draw(canvas, ctx);
+function drawGame(demo) {
+    game.draw(canvas, ctx, demo);
 }
 
 /**

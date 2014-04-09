@@ -16,11 +16,13 @@ window.Player = (function() {
         this.x = x;
         this.y = y;
         
+        this.inventory = new Inventory();
+        
         /**
          * The animable object of the player.
          * @type Animable
          */
-        this.animable = new Animable("assets/player/player.png");
+        this.animable = new Animable("assets/player/android.png");
         
         /**
          * The movement speed of the player.
@@ -34,6 +36,12 @@ window.Player = (function() {
          * @type Number
          */
         this.blockBreakTimestamp = -1;
+        
+        /**
+         * Did the player move on the last tick.
+         * @type Boolean
+         */
+        this.moved = false;
     }
     
         
@@ -58,6 +66,13 @@ window.Player = (function() {
         this.animable.load(assetLoader);
     };
     
+    /**
+     * Did the player move on the last tick.
+     * @returns {Boolean} If the player moved.
+     */
+    Player.prototype.getMoved = function() {
+        return this.moved;
+    };
     
     /**
      * Update the player.
@@ -82,13 +97,13 @@ window.Player = (function() {
             this.y += this.speed * deltaTimeMillis;
 	}
         
-        var moved = false;
+        this.moved = false;
         if (this.x !== originalX || this.y !== originalY) {
-            moved = true;
+            this.moved = true;
         }
         
         // Check if the player is trying to break a block
-        if (keyStatus[Game.KEYS.SPACE] && !moved) {
+        if (keyStatus[Game.KEYS.SPACE] && !this.moved) {
             // Set the time that they started breaking the block.
             if (this.blockBreakTimestamp === -1) {
                 this.blockBreakTimestamp = Utilities.currentTimeMillis();

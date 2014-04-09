@@ -13,5 +13,13 @@ window.Npc = (function() {
         this.definition = definition;
     }
     
+    /**
+     * Get the definition of the Npc.
+     * @returns {NpcDefinition} The NpcDefinition.
+     */
+    Npc.prototype.getDefinition = function() {
+        return this.definition;
+    };
+    
     return Npc;
 })();

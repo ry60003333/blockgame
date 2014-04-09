@@ -8,9 +8,16 @@ window.World = (function() {
     
     /**
      * Creates a new World.
-     * @returns {_L7.World}
+     * @param {Game} game The parent game.
+     * @returns {World} The new World object.
      */
-    function World() {
+    function World(game) {
+        
+        /**
+         * The parent game.
+         * @type Game
+         */
+        this.game = game;
         
         /**
          * The loaded chunks in the word.
@@ -109,7 +116,7 @@ window.World = (function() {
                     }
                     else {
                         // Generate a new chunk.
-                        chunk = this.generator.generateChunk(new Coordinate(chunkX, chunkY));
+                        chunk = this.generator.generateChunk(this.game, new Coordinate(chunkX, chunkY));
                     }
                     this.chunks[chunkKey] = chunk;
                 }
@@ -118,7 +125,7 @@ window.World = (function() {
                 activeChunks[chunkKey] = true;
                 
                 // Draw the chunk
-                chunk.draw(player, ctx, tileManager);
+                chunk.draw(player, ctx, this.game);
                 
                 // Draw the chunk coordinate if the grid is enabled.
                 if (this.drawGrid) {

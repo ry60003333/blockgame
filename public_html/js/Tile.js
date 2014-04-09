@@ -15,9 +15,10 @@ window.Tile = (function () {
      * @param {Number} nextId The ID that the tile turns into when broken.
      * @param {String} category The category of the tile.
      * @param {Number} timeToBreak The time (in milliseconds) that it takes to break the tile.
+     * @param {Number} breakItemId The ID of the item that the tile gives when it is broken.
      * @returns {Tile} The new tile object.
      */
-    function Tile(id, name, fillStyle, image, nextId, category, timeToBreak) {
+    function Tile(id, name, fillStyle, image, nextId, category, timeToBreak, breakItemId) {
         this.id = id;
         this.name = name;
         this.fillStyle = fillStyle;
@@ -25,6 +26,7 @@ window.Tile = (function () {
         this.nextId = nextId;
         this.category = category;
         this.timeToBreak = timeToBreak;
+        this.breakItemId = breakItemId;
     }
     
     /**

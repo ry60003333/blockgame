@@ -15,14 +15,14 @@ window.Game = (function() {
         this.itemManager = new ItemManager();
         this.npcManager = new NpcManager();
         this.player = new Player(0, 0);
-        this.world = new World();
+        this.world = new World(this);
         this.onlyDrawWorld = false;
     }
     
     /**
      * The build number of the game.
      */
-    Game.BUILD = 20;
+    Game.BUILD = 30;
     
     /**
      * The version number of the game.
@@ -103,9 +103,10 @@ window.Game = (function() {
      * Draw the contents of the game.
      * @param {type} canvas The canvas.
      * @param {type} ctx The 2D drawing context.
+     * @param {Boolean} demo Is the world being drawn as a demo.
      * @returns {undefined}
      */
-    Game.prototype.draw = function(canvas, ctx) {
+    Game.prototype.draw = function(canvas, ctx, demo) {
         
         if (this.onlyDrawWorld) {
             this.world.draw(this.player, canvas, ctx, this.tileManager);
@@ -156,29 +157,45 @@ window.Game = (function() {
         ctx.restore();
         
         
-        
-        // Draw the player, in the center
-        var x = (canvas.width / 2) - (Game.TILE_SIZE / 2);
-        var y = (canvas.height / 2) - (Game.TILE_SIZE / 2);
-        ctx.save();
-        ctx.translate(x, y);
-        this.player.draw(ctx);
-        ctx.restore();
-        
-        // Draw build and debugging info
-        ctx.font = "bold 20px Comic Sans";
-        var y = 30;
-        ctx.fillText("Droid World " + Game.VERSION + " (Build " + Game.BUILD + ")", 5, y);
-        ctx.font = "bold 15px Comic Sans";
-        ctx.fillText("Player: " + this.player.x.toFixed(2) + "," + this.player.y.toFixed(2), 5, y += 15);
-        ctx.fillText("Canvas Size: " + canvas.width + "," + canvas.height, 5, y += 15);
-        ctx.fillText("Tile Size: " + Game.TILE_SIZE, 5, y += 15);
-        ctx.fillText("Loaded chunks: " + Object.keys(this.world.chunks).length, 5, y += 15);
-        ctx.fillText("Arrow keys - Movement", 5, y += 15);
-        ctx.fillText("D - Toggle world grid", 5, y += 15);
-        ctx.fillText("W - Draw only world", 5, y += 15);
-        ctx.fillText("Z - Zoom", 5, y += 15);
-        ctx.fillText("Space - Break Tile", 5, y += 15);
+        if (!demo) {
+            // Draw the player, in the center
+            var x = (canvas.width / 2) - (Game.TILE_SIZE / 2);
+            var y = (canvas.height / 2) - (Game.TILE_SIZE / 2);
+            ctx.save();
+            ctx.translate(x, y);
+            this.player.draw(ctx);
+            ctx.restore();
+
+            // Draw build and debugging info
+            ctx.font = "bold 20px Comic Sans";
+            var y = 30;
+            ctx.fillText("Droid World " + Game.VERSION + " (Build " + Game.BUILD + ")", 5, y);
+            ctx.font = "bold 15px Comic Sans";
+            ctx.fillText("Player: " + this.player.x.toFixed(2) + "," + this.player.y.toFixed(2), 5, y += 15);
+            ctx.fillText("Canvas Size: " + canvas.width + "," + canvas.height, 5, y += 15);
+            ctx.fillText("Tile Size: " + Game.TILE_SIZE, 5, y += 15);
+            ctx.fillText("Loaded chunks: " + Object.keys(this.world.chunks).length, 5, y += 15);
+            ctx.fillText("Arrow keys - Movement", 5, y += 15);
+            ctx.fillText("D - Toggle world grid", 5, y += 15);
+            ctx.fillText("W - Draw only world", 5, y += 15);
+            ctx.fillText("Z - Zoom", 5, y += 15);
+            ctx.fillText("Space - Break Tile", 5, y += 15);
+
+            // Draw the inventory
+            ctx.save();
+            ctx.translate(canvas.width - Game.TILE_SIZE - 20, 0);
+            this.player.inventory.draw(this, ctx);
+            ctx.restore();
+        }
+    };
+    
+    /**
+     * Reset the game.
+     * @returns {undefined}
+     */
+    Game.prototype.reset = function() {
+        this.player.x = 0;
+        this.player.y = 0;
     };
     
     return Game;

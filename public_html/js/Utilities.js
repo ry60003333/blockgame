@@ -45,6 +45,16 @@ window.Utilities = (function() {
         return new Date().getTime();
     };
     
+    /**
+     * Get the distance between two Coordinates.
+     * @param {Coordinate} first The first Coordinate.
+     * @param {Coordinate} second The second Coordinate
+     * @returns {Number} The distance.
+     */
+    Utilities.distance = function(first, second) {
+        return Math.sqrt(Math.pow((second.x - first.x), 2) + Math.pow((second.y - first.y), 2));
+    };
+    
     return Utilities;
     
     
